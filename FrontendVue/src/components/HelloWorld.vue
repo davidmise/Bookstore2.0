@@ -16,8 +16,8 @@ defineProps({
       <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>. -->
     </span>
     <!-- Trigger the modal -->
-    <button style="border-radius: 20px;" type="button" class="btn btn-outline-success mx-5 mb-4" data-toggle="modal" data-target="#myModal">Add Books + </button>   
-  
+
+
   </div>
   
   <div class="input-group rounded ">

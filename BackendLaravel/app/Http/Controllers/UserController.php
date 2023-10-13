@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Authors;
 use Doctrine\Inflector\Rules\English\Rules;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator; 

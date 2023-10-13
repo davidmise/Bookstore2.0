@@ -179,8 +179,9 @@ export default{
         addBook(){
             // console.log('added!')
             // this.addGenre();
-            this.BooksDetails.Author_id = localStorage.getItem('author_id')
-            console.log(localStorage.getItem('author_id'))
+            this.BooksDetails.Author_id = parseInt(localStorage.getItem('Author_id'));
+            // console.log(localStorage.getItem('Author_id'));
+            console.log('Author id is:',this.BooksDetails.Author_id);
             console.log(this.BooksDetails);
             // this.BooksDetails.Author_id = 
             axios.post('http://127.0.1:8000/api/books',this.BooksDetails)
@@ -189,16 +190,15 @@ export default{
                 console.log(this.BooksDetails); // check if data is populated
                 console.log('added successfully')
 
-                // var user_role = localStorage.getItem('user_role') //retrieve user id
-                //  this.user = localStorage.getItem('author_id')
+                var user_role = localStorage.getItem('user_role') //retrieve user id
+                //  var author_id = this.BooksDetails.Author_id
 
-                // if(user_role == 'author') {
-                //     this.Author_id = this.user 
-                //     console.log(this.Author_id)
-                //     console.log(user_role)
+                if(user_role == 'author') {
+                    // console.log(this.BAuthor_id)
+                    console.log('this is an ',user_role)
 
                    
-                // }
+                }
             })
             .catch(error =>{
                 console.error('Error fetching books:',error)

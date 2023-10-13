@@ -1,6 +1,6 @@
 <template >
     <!-- <button style="border-radius: 20px;" type="button" class="btn btn-outline-success " data-toggle="modal" data-target="#myModal">Add Books + </button>    -->
-    <addBook style="border-radius: 20px;"  type="submit" text="Add Book+" classObject=" btn btn-outline-success mx-5" data-toggle="modal" data-target="#myModal"> </addBook>
+    <!-- <addBook style="border-radius: 20px;"  type="submit" text="Add Book+" classObject=" btn btn-outline-success mx-5" data-toggle="modal" data-target="#myModal"> </addBook> -->
     <template v-for="(book, index) in Books" :key="index">
         <div class="container mt-5 pt-5">
           <div class="row">
@@ -18,8 +18,8 @@
                                     <h6>Genre:{{book.genre.category}}</h6>
                                     <p class="card-text"> {{book.description}}This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer. </p>
                                     <p></p>
-                                    <p class="card-text"><small class="text-muted">Published at: {{ book.published_date}} </small></p>
-                                    <p class="card-text"><small class="text-muted">By: {{ book.author}} </small></p>
+                                    <p class="card-text"><small class="text-muted"> <b>Published at:</b> {{ book.published_date}} </small></p>
+                                    <p class="card-text"><small class="text-muted"> <b>By:</b> {{ book.author.name_of_the_Author}} </small></p>
                                     <p>Price: {{book.price}} </p>
                                     <button type="button" class="btn btn-outline-success">Buy </button>
                                     <img style=" margin-left:10px;" width="36" height="36" src="https://img.icons8.com/sf-regular-filled/96/12B886/shopping-cart.png" alt="shopping-cart"/>
@@ -123,11 +123,11 @@
 <script>
 
 import axios from "axios"
-import addBook from '@/components/Button.vue'
+// import addBook from '@/components/Button.vue'
 export default{
    
    components:{
-    addBook
+    // addBook
    },
     data(){
         return{
@@ -149,6 +149,9 @@ export default{
         }
 
     },
+    created() {
+      localStorage.getItem('user_id')
+    },
     // protect books
    
     methods: {
@@ -159,8 +162,8 @@ export default{
         axios.get('http://127.0.0.1:8000/api/books')
         .then(response => {
          this.Books = response.data;
-         console.log(response.data.error)
          console.log(this.Books); // Check if the data is populated
+        //  console.log(this.user_id)
       })
 
       .catch(error => {

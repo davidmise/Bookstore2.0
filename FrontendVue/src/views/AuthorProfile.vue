@@ -107,29 +107,46 @@ data() {
             name_of_the_Author: '',
             biography: '',
             author_birthdate: '',
-            nationality: ''
+            nationality: '',
+            user_id:localStorage.getItem('user_id')
         }
     }
   
 },
-
+created() {
+  console.log('user id is:',localStorage.getItem('user_id'));  
+},
 methods: {
     addAuthor(){
             console.log('added!')
             // this.BooksDetails.Author_id = 
             axios.post('http://127.0.1:8000/api/authors',this.AuthorDetails)
             .then(response => {
+
                 this.AuthorDetails = response.data;
-                this.Author_id = response.data.Author_id;
-                console.log(this.AuthorDetails); // check if data is populated
-                console.log('added successfully')
+               this.AuthorDetails.user_id= response.data.Author_id;
+            //    console.log(this.AuthorDetails.user_id)
+
+                // Store Author_id in the browser 
+                localStorage.setItem('Author_id', response.data.Author_id);
+                
+                // convert author id into interger
+                var Author_id = parseInt(localStorage.getItem('Author_id'));
+                
+                // check if data is populated
+                console.log(this.AuthorDetails); 
+                console.log('added successfully');
 
                 var user_role = localStorage.getItem('user_role') //retrieve user role
-                 console.log('the stored id is', localStorage.getItem('author_id')); 
+
+                console.log('the Author_id is:', Author_id); 
+
                 if(user_role == 'author') {
+                    // this.AuthorDetails.user_id = Author_id
+                    console.log('welcone')
                     // this.Author_id = this.user 
-                    console.log(this.Author_id)
-                
+                    console.log(Author_id)
+        
                 }
             })
             .catch(error =>{

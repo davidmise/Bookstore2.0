@@ -31,7 +31,7 @@
                         <button type="submit" class="btn btn-primary px-lg-5" style="background-color: teal; border:none;" name="submit">Login</button>
                     </div>  
                      <router-link to="/register">
-                        <span style="color: teal;"> Do not have an Acount? </span>
+                        <span style="color: teal;"> Do not have an Acount?</span>
                      </router-link>
                   </form>                    
                 </div>
@@ -74,6 +74,7 @@ import validator from "../../src/helpers/validator.js"
       },
 
       validation(){
+        
         var validate = true;
         this.error.email = validator(this.LoginData.email, 'email')
         this.error.password = validator(this.LoginData.password, 'required')
@@ -105,12 +106,12 @@ import validator from "../../src/helpers/validator.js"
         axios.post('http://127.0.0.1:8000/api/login', this.LoginData)
         .then(response =>{
           // Handle success
-            console.log(response.data) 
+            console.log(response.data.user) 
 
             // Extract the user_id from the response
             const user_id = response.data.user.id; 
             localStorage.setItem('user_id', user_id); // Store it in local storage
-            console.log(localStorage.getItem('user_id'));
+            console.log('user id is',localStorage.getItem('user_id'));
 
             // Extract the user_role from the response
             const user_role = response.data.user.role;
@@ -122,7 +123,8 @@ import validator from "../../src/helpers/validator.js"
             if (response.data.user.role === 'author') {
                 // console.log()
                 // tulikuwa tunavuta response.data.author.id
-              localStorage.setItem("author_id", response.data.user.author.id)
+                localStorage.setItem('author_id', response.data.user.author.id)
+                console.log('auhor id is:',localStorage.getItem('author_id'))
              
                   // Redirect to author profile page
                   this.$router.push({ name: 'author.profile' });

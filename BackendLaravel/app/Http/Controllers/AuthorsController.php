@@ -4,10 +4,13 @@
     
     use Illuminate\Http\Request;
     use App\Models\Authors;
+    use App\Models\User;
     // use AuthorService;
     use GuzzleHttp\Promise\Create;
     use Illuminate\Support\Facades\Validator;
-use PharIo\Manifest\Author;
+    use PharIo\Manifest\Author;
+    use Illuminate\Support\Facades\Auth;
+
 
     class AuthorsController extends Controller
     {
@@ -34,7 +37,8 @@ use PharIo\Manifest\Author;
                 'biography' => 'required|string',
                 'author_birthdate' => 'required|date',
                 'nationality' => 'required|string',
-                'user_id' => 'required|id'
+                'user_id'=>'required'
+                
             ];
     
             $messages = [
@@ -42,8 +46,8 @@ use PharIo\Manifest\Author;
                 'biography.required' => 'Biography must be field',
                 'author_birthdate.required' => 'Author birthdate must be field',
                 'nationality.required' => 'Nationality must be field',
-                'user_id.required' => 'Id must be filled'
-            ];
+                'user_id.reqired'=> 'User_id must be filled'
+                 ];
         
             $validator = Validator::make($request -> all(), $rules, $messages);
                 if($validator -> fails())
@@ -53,26 +57,23 @@ use PharIo\Manifest\Author;
                         'errors' => $validator->errors()
                     ], 422);
                 }
-            
-            // Validate the incoming request data
-            // $validate = $request->validate([
-            //     'name_of_the_Author' => 'required|string|max:255',
-            //     'biography' => 'required|string',
-            //     'author_birthdate' => 'required|date',
-            //     'nationality' => 'required|string',
-            // ]);
-
+       
            
+           
+             // Check if the user already has an author record
+            
+             
             // Create a new author record
             $author = Authors::create($request->all());
-
+        
             // $author =  $this->authorService->saveAuthor($request->all());
 
 
             return response()->json([
                 'sucess' => true,
                 'message' => 'Author created successfully',
-                'Author_id' => $author->id // Include the ID in the response
+                'Author_id' => $author->id, // Include the ID in the response
+       
             ], 200);
 
         }
@@ -129,11 +130,12 @@ use PharIo\Manifest\Author;
                     'status' =>false,
                     'message' => 'Author not found'
             ], 404);
+
             }
     
             // Delete the author record
             $author->delete();
-    
+            
             return response()->json([
                 'status' =>true,
                 'message' => 'Author deleted successfully'

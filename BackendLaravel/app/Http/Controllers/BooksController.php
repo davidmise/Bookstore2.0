@@ -1,24 +1,12 @@
 <?php
-
-// namespace App\Http\Controllers;
-
-// use App\Models\genre;
-// use Illuminate\Http\Request;
-
-// class BooksController extends Controller
-// {
-//     //
-    
-
-// }
-
-
 namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Books;
 use Illuminate\Support\Facades\Validator; 
+use Illuminate\Support\Facades\Auth;
+use App\Models\Authors;
 
 class BooksController extends Controller
 {
@@ -27,17 +15,19 @@ class BooksController extends Controller
         //display user input  
         $books = Books::with('genre')->with('author')->get();
         return $books;
+
+        // $books = Authors::with('books')->get();
+        // return $books;
     }
 
     // Create a new book record
     public function create(Request $request)
     {
-
+        // dd($request->all());
         $rules = [
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'Author_id' => 'required',
-            // 'Author_id' => 'required',
             'genre_id' => 'required|exists:genres,id',
             'price' => 'required|numeric',
             'published_date' => 'required|date',
@@ -63,32 +53,22 @@ class BooksController extends Controller
                 ], 422);
             }
 
+            
+             
 
-    
+                $book = Books::create($request->all());
 
-        // // Validate the incoming request data
-        // $request->validate([
-        //     'title' => 'required|string|max:255',
-        //     'description' => 'required|string',
-        //     'Author_id' => 'required|exists:authors,id',
-        //     'genre_id' => 'required|exists:genres,id',
-        //     'price' => 'required|numeric',
-        //     'published_date' => 'required|date',
-        //     'cover_image' => 'required|string',
-        // ]);
+        
 
-        // Create a new book record
-        // $book = Books::create([
-        //     'genre_id' => $request->genre_id,
-        //     'Author_id' => $user->author->id,
-        // ]);
-        $book = Books::create($request->all());
-
-        return response()->json([
-            'message' => 'Book created successfully',
-            'status' => true,
-            'book' => $book
-        ], 201);
+                return response()->json([
+                    'message' => 'Book created successfully',
+                    'status' => true,
+                    'book' => $book,
+                    // 'user'=> $user,
+                    // 'author'=>$author
+                ], 201);
+            
+  
     }
 
     // Retrieve a book by ID
@@ -114,6 +94,7 @@ class BooksController extends Controller
         if (!$book) {
             return response()->json(['message' => 'Book not found'], 404);
         }
+        // var author_id = localStorage.getItem('author_id');
 
         // Validate the incoming request data
         $request->validate([
@@ -122,6 +103,7 @@ class BooksController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric',
             'cover_image' => 'required|string',
+            // 'Author_id' => $author_id
         ]);
 
         // Update the book record
@@ -151,7 +133,7 @@ class BooksController extends Controller
     {
         $searchTerm = $request->input('search_term');
         
-        $books = Books::leftJoin('Authors', 'Books.author_id','=','Authors.id')
+        $books = Books::leftJoin('Authors', 'Books.author_id','=','Author.id')
                         ->where(function ($query) use ($searchTerm){
                         $query -> where('Books.title', 'LIKE', "%$searchTerm%")
                         ->orWhere('Authors.name_of_the_Author', 'LIKE', "%$searchTerm%");
