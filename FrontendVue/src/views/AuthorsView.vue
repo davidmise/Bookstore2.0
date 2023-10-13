@@ -4,37 +4,28 @@
                 UPload your new book here your new book here: {{ this.BooksDetails.genreId}}
          <addBook style="border-radius: 20px;"  type="submit" text="Add Book+" classObject=" btn btn-outline-success mx-5" data-toggle="modal" data-target="#myModal"> </addBook>
     </div>
-    <!-- <div> -->
-        <!-- <form action="" class="row g-3 was-validated" @submit.prevent="addGenre">
-
-            <div class="col-md-4">
-                <label for="validationCustom02" class="form-label"> Genre </label>
-                <input type="text" class="form-control" id="validationCustom02" v-model="Genre.category" required>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-            </div>
-
-            <div class="col-12">
-                <button class="btn btn-outline-success" type="submit">Submit form</button>
-            </div>
-        </form>
-    </div> -->
      <!-- Modal -->
      <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog ">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Book Details</h4>
+                <div class="modal-header container">
+                    <div class="row align-items-start">
+                        <div class="col-2">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                
+                        <div class="col-10">
+                            <h4 class="modal-title">Book Details</h4>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-body">
                     <!-- Books detatils form starts here -->
-                    <form class="row g-3 was-validated" @submit.prevent="addBook">
+                    <form class=" was-validated" @submit.prevent="addBook">
                         
                         <!-- Book Title -->
-                        <div class="col-md-4">
-                            <label for="validationCustom01" class="form-label">Title</label>
+                        <div class="mb-3">
+                            <label for="validationCustom01" class="form-label">Title:</label>
                             <input type="text" class="form-control" id="validationCustom01" v-model="BooksDetails.title" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -42,8 +33,8 @@
                         </div>
                        
                         <!-- Book Description -->
-                        <div class="mb-3 col-md-7">
-                            <label for="validationTextarea" class="form-label">Description</label>
+                        <div class="mb-3">
+                            <label for="validationTextarea" class="form-label">Description:</label>
                             <textarea class="form-control is-invalid" id="validationTextarea" placeholder="Required example textarea" v-model="BooksDetails.description" required></textarea>
                             <div class="valid-feedback">
                                 Looks good!
@@ -51,10 +42,10 @@
                         </div>
                         
                         <!-- Book Price -->
-                        <div class="col-md-4">
-                            <label for="validationCustomUsername" class="form-label">Price</label>
+                        <div class="mb-3">
+                            <label for="validationCustomUsername" class="form-label">Price:</label>
                             <div class="input-group has-validation">
-                                <span class="input-group-text" id="inputGroupPrepend">Tzsh</span>
+                                <span class="input-group-text" id="inputGroupPrepend" >Tzs</span>
                                 <input type="number" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" v-model="BooksDetails.price" required>
                                 <div class="invalid-feedback">
                                     Please enter the price of the book
@@ -63,7 +54,7 @@
                         </div>
 
                         <!-- Publioshed date of the Book -->
-                        <div class="col-md-6">
+                        <div class="mb-3">
                             <label for="validationCustom03" class="form-label">Published Date</label>
                             <input type="date" format="YYYY-MM-DD" class="form-control" id="validationCustom03" v-model="BooksDetails.published_date" required>
                             <div class="invalid-feedback">
@@ -72,31 +63,25 @@
                         </div>
 
                         <!-- Cover image of the book -->
-                        <div class="col-md-3">
+                        <div class="mb-3">
                             <label for="validationCustom05" class="form-label">Cover image (link) </label>
                             <input type="link" class="form-control" id="validationCustom05" v-model="BooksDetails.cover_image" required>
                             <div class="invalid-feedback">
-                                Please provide a valid zip.
+                                Please provide a valid link
                             </div>
                         </div>
 
                         <!-- select genre -->
-                        <select class="form-select" aria-label="Default select example" v-model="BooksDetails.genre_id">
-                            <option value="" disabled>Select a Genre</option>
-                            <template v-for="genre in genres" :key="genre.id">
-                                <option :value="genre.id">{{ genre.category }}</option>
-                            </template>
-                        </select>
+                            <select class="form-select" aria-label="Default select example" id="validationCustom05" v-model="BooksDetails.genre_id">
+                                <option value="" disabled class="form-label mb-3" >Select a Genre</option>
+                                <template v-for="genre in genres" :key="genre.id">
+                                    <option :value="genre.id" class="form-label ">{{ genre.category }}</option>
+                                </template>
+                            </select>
+                            
 
-                    <!-- <div class="col-md-4">
-                        <label for="validationCustom02" class="form-label"> Genre </label>
-                        <input type="text" class="form-control" id="validationCustom02" v-model="Genre.category" required>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                    </div> -->
                         <!-- Terms and agreements -->
-                        <div class="col-12">
+                        <div class="mb-3">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
                                 <label class="form-check-label" for="invalidCheck">

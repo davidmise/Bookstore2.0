@@ -7,19 +7,28 @@
     </div>
       <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Author Details</h4>
+                    <div class="row align-items-start">
+                        <div class="col-2">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                
+                        <div class="col-10">
+                            <h4 class="modal-title">Author Details</h4>
+                        </div>
+                    </div>
+                   
+                    
                 </div>
                 <div class="modal-body">
                     <!-- Author Details form starts here -->
-                    <form class="row g-3 was-validated" @submit.prevent="addAuthor">
-                        
+                    <form class="was-validated" @submit.prevent="addAuthor">
+                                               
                         <!--Author Name -->
-                        <div class="col-md-4">
-                            <label for="validationCustom01" class="form-label">Name</label>
+                        <div class="mb-3">
+                            <label for="validationCustom01" class="form-label">Name:</label>
                             <input type="text" class="form-control" id="validationCustom01" v-model="AuthorDetails.name_of_the_Author" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -27,29 +36,17 @@
                         </div>
                        
                         <!-- Author Biography -->
-                        <div class="mb-3 col-md-7">
-                            <label for="validationTextarea" class="form-label">Biography</label>
+                        <div class="mb-3">
+                            <label for="validationTextarea" class="form-label">Biography:</label>
                             <textarea class="form-control is-invalid" id="validationTextarea" placeholder="Required example textarea" v-model="AuthorDetails.biography" required></textarea>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
-                        
-                        <!-- Book Price -->
-                        <!-- <div class="col-md-4">
-                            <label for="validationCustomUsername" class="form-label">Price</label>
-                            <div class="input-group has-validation">
-                                <span class="input-group-text" id="inputGroupPrepend">Tzsh</span>
-                                <input type="number" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" v-model="AuthorDetails.price" required>
-                                <div class="invalid-feedback">
-                                    Please enter the price of the book
-                                </div>
-                            </div>
-                        </div> -->
-
+                    
                         <!--AUTHOR BIRTHDATE -->
-                        <div class="col-md-6">
-                            <label for="validationCustom03" class="form-label">Author BirthDate</label>
+                        <div class="mb-3">
+                            <label for="validationCustom03" class="form-label">BirthDate:</label>
                             <input type="date" format="YYYY-MM-DD" class="form-control" id="validationCustom03" v-model="AuthorDetails.author_birthdate" required>
                             <div class="invalid-feedback">
                                 Please provide a valid Date.
@@ -57,8 +54,8 @@
                         </div>
 
                         <!-- Author's Nationality-->
-                        <div class="col-md-3">
-                            <label for="validationCustom05" class="form-label"> Nationality </label>
+                        <div class="mb-3">
+                            <label for="validationCustom05" class="form-label"> Nationality: </label>
                             <input type="link" class="form-control" id="validationCustom05" v-model="AuthorDetails.nationality" required>
                             <div class="invalid-feedback">
                                 Please provide your Nationality
@@ -66,7 +63,7 @@
                         </div>
 
                         <!-- Terms and agreements -->
-                        <div class="col-12">
+                        <div class="mb-3">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
                                 <label class="form-check-label" for="invalidCheck">
@@ -78,7 +75,7 @@
                             </div>
                         </div>
 
-                        <div class="col-12">
+                        <div class="mb-3">
                             <button class="btn btn-outline-success" type="submit">Update Profile </button>
                         </div>
                     </form>
