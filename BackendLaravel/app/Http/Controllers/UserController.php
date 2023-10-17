@@ -53,7 +53,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        $user = User::find($id);
+        $user = User::with("author")->find($id);
 
         if(!$user){
              return response()->json(
@@ -64,7 +64,7 @@ class UserController extends Controller
             );
         }
 
-        return $user;
+        return response()->json($user);
     }
 
     /**
@@ -86,15 +86,13 @@ class UserController extends Controller
 
        $user->update([
         'name' => $request->name,
-        // 'LastName' => $request->LastName,
-        // 'UserName' => $request['UserName'],
         'email' => $request['email'],
         'password' => $request->password,
-        'address' => $request ->address,
+        'address' => $request->address,
         'phone_number' => $request['phone_number'],
         'role' => $request['role']
        ]);
-       
+  
 
     return response()->json(
         [

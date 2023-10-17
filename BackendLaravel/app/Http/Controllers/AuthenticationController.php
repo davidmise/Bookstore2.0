@@ -44,17 +44,28 @@ class AuthenticationController extends Controller
             }
     
         // return $request;
-        $myModel = new User([
+        $user = new User([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')), //  hash the password
             'address' => $request ->input('address'),
-            'phone_number' => $request->input('PhoneNumber'),
+            'phone_number' => $request->input('phone_number'),
             'role' =>  $request->input('role'),
            
         ]);
+        $user->save();
+
+        if($request->input['role']=== 'author'){
+
+            $author = new Authors([
+                // author info
+                'user_id' => $user->id,
+            ]);
+            $author->save();
+        }
+        
     
-        $myModel->save();
+        
     
         return response()->json([
             'status' => true,

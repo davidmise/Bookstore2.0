@@ -123,8 +123,8 @@ import validator from "../../src/helpers/validator.js"
             if (response.data.user.role === 'author') {
                 // console.log()
                 // tulikuwa tunavuta response.data.author.id
-                localStorage.setItem('author_id', response.data.user.author.id)
-                console.log('auhor id is:',localStorage.getItem('author_id'))
+                // localStorage.setItem('author_id', response.data.user.author.id)
+                // console.log('auhor id is:',localStorage.getItem('Author_id'))
              
                   // Redirect to author profile page
                   this.$router.push({ name: 'author.profile' });

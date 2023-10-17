@@ -42,7 +42,7 @@ Route::post('/login',[AuthenticationController::class, "login"]);
 Route::post('/authors',[AuthorsController::class, "create"]);
 Route::get('/getAuthors',[AuthorsController::class, "index"]);
 Route::get('/authors/{id}',[AuthorsController::class, "show"]);
-Route::put('/authors',[AuthorsController::class, "edit"]);
+Route::put('/authors',[AuthorsController::class, "update"]);
 Route::delete('/authors',[AuthorsController::class, "destroy"]);
 Route::get('/search_authors',[AuthorsController::class, "searchAuthors"]);
 

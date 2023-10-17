@@ -9,8 +9,8 @@
         // Perform logout logic here, e.g., clear user data, tokens, etc.
         // You can also remove the user_id from local storage here
         localStorage.removeItem('user_id');
-        localStorage.removeItem('author_id');
-        console.log('author id is:', localStorage.getItem('author_id'));
+        localStorage.removeItem('Author_id');
+        console.log('Author id is:', localStorage.getItem('Author_id'));
 
         this.$router.push({ name: 'login' });
         // Emit an event to notify the parent component that the user has logged out
