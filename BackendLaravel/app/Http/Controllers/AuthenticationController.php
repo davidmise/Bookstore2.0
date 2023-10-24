@@ -51,14 +51,11 @@ class AuthenticationController extends Controller
             'address' => $request ->input('address'),
             'phone_number' => $request->input('phone_number'),
             'role' =>  $request->input('role'),
-           
         ]);
         $user->save();
 
-        if($request->input['role']=== 'author'){
-
+        if($request['role'] == 'author'){
             $author = new Authors([
-                // author info
                 'user_id' => $user->id,
             ]);
             $author->save();

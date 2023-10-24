@@ -186,7 +186,7 @@
                 </div>
                 <div class="modal-body">
                     <!-- Author Details form starts here -->
-                    <form class="was-validated" @submit.prevent="addAuthor">
+                    <form class="was-validated" @submit.prevent="editAuthor">
                                                
                         <!--Author Name -->
                         <div class="mb-3">
@@ -273,7 +273,7 @@ data() {
             biography: '',
             author_birthdate: '',
             nationality: '',
-            user_id:localStorage.getItem('user_id')
+            user_id:  parseInt(localStorage.getItem('user_id'))
         }
     }
   
@@ -294,21 +294,20 @@ created() {
 
 
 methods: {
-    addAuthor(){
-            console.log('added!')
-            // this.BooksDetails.Author_id = 
-            axios.post('http://127.0.1:8000/api/authors',this.AuthorDetails)
+    editAuthor(){
+        var Author_id = this.Author.id
+            axios.put(`http://127.0.1:8000/api/authors/${Author_id}`, this.AuthorDetails)
             .then(response => {
 
                 this.AuthorDetails = response.data;
-                this.AuthorDetails.user_id= response.data.Author_id;
+               
                 this.ShowModal=false;
 
                 // Store Author_id in the browser 
                 localStorage.setItem('Author_id', response.data.Author_id);
                 
                 // convert author id into interger
-                var Author_id = parseInt(localStorage.getItem('Author_id'));
+              
                 
                 // check if data is populated
                 console.log(this.AuthorDetails); 
@@ -340,6 +339,7 @@ methods: {
          this.UserDetails = response.data;
 
          this.Author= response.data.author;
+         this. Author.id = response.data.author.id;
          
          console.log('Author Details:', this.Author)
           

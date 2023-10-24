@@ -57,8 +57,7 @@
                         'errors' => $validator->errors()
                     ], 422);
                 }
-       
-           
+
            
              // Check if the user already has an author record
             
@@ -105,18 +104,26 @@
             }
     
             // Validate the incoming request data
-            $request->validate([
-                'name_of_the_Author' => 'required|string|max:255',
+           $validatedData = $request->validate([
+                'name_of_the_Author' => 'string|max:255',
                 // Add more validation rules as needed
-                'biography' => 'required|string',
+                'biography' => 'string',
+                'author_birthdate' => 'date',
+                'nationality'=>'string'
             ]);
     
             // Update the author record
-            $author->update($request->all());
+            $author->name_of_the_Author = $validatedData['name_of_the_Author'];
+            $author->biography = $validatedData['biography'];
+            $author->author_birthdate = $validatedData['author_birthdate'];
+            $author->nationality = $validatedData['nationality'];
+
+            $author->save();
     
             return response()->json([
                 'status' => true,
-                'message' => 'Author updated successfully'
+                'message' => 'Author updated successfully',
+                'return_data' => $author,
             ]);
         }
     

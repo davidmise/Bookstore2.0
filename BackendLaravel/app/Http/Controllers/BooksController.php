@@ -7,6 +7,7 @@ use App\Models\Books;
 use Illuminate\Support\Facades\Validator; 
 use Illuminate\Support\Facades\Auth;
 use App\Models\Authors;
+use PharIo\Manifest\Author;
 
 class BooksController extends Controller
 {
@@ -27,7 +28,7 @@ class BooksController extends Controller
         $rules = [
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'Author_id' => 'required',
+            'Author_id' => 'required|exists:authors,id',
             'genre_id' => 'required|exists:genres,id',
             'price' => 'required|numeric',
             'published_date' => 'required|date',
@@ -55,9 +56,9 @@ class BooksController extends Controller
 
             
              
-
+        
                 $book = Books::create($request->all());
-
+                $author = $request->author->id;
         
 
                 return response()->json([
@@ -65,7 +66,7 @@ class BooksController extends Controller
                     'status' => true,
                     'book' => $book,
                     // 'user'=> $user,
-                    // 'author'=>$author
+                    'author'=>$author
                 ], 201);
             
   

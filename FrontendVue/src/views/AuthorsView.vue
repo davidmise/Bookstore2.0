@@ -1,7 +1,7 @@
 <template>
     <div>
         
-                UPload your new book here your new book here: {{ this.BooksDetails.genreId}}
+              UPload your new book here your new book here: {{ this.BooksDetails.genreId}}
          <addBook style="border-radius: 20px;"  type="submit" text="Add Book+" classObject=" btn btn-outline-success mx-5" data-toggle="modal" data-target="#myModal"> </addBook>
     </div>
      <!-- Modal -->
@@ -118,6 +118,8 @@ export default{
 
     data(){
         return{
+            UserDetails:{},
+            Author:{},
             Books:[],
             genres:[],
             BooksDetails:{
@@ -146,6 +148,7 @@ export default{
 
     },
     created() {
+        this.getUserWithAuthor()
         this.fetchGenres()
 
     },
@@ -162,16 +165,19 @@ export default{
    
     methods: {
         addBook(){
-            // console.log('added!')
+            console.log('added!')
             // this.addGenre();
-            this.BooksDetails.Author_id = parseInt(localStorage.getItem('Author_id'));
-            // console.log(localStorage.getItem('Author_id'));
-            console.log('Author id is:',this.BooksDetails.Author_id);
+            this.BooksDetails.Author_id = this.Author.id;
+          
+
+
             console.log(this.BooksDetails);
-            // this.BooksDetails.Author_id = 
+            console.log(this.BooksDetails.Author_id);
+           
             axios.post('http://127.0.1:8000/api/books',this.BooksDetails)
             .then(response => {
                 this.BooksDetails = response.data;
+                this.BooksDetails.Author_id = localStorage.getItem('Author_id');
                 console.log(this.BooksDetails); // check if data is populated
                 console.log('added successfully')
 
@@ -189,6 +195,33 @@ export default{
                 console.error('Error fetching books:',error)
             });
         },
+
+        getUserWithAuthor(){
+
+            var User_id = parseInt(localStorage.getItem('user_id'))
+            axios.get(`http://127.0.0.1:8000/api/users/${User_id}`)
+            .then(response => {
+            this.UserDetails = response.data;
+
+            this.Author = response.data.author;
+            this. Author.id = response.data.author.id;
+            // console.log(this.Author.id);
+
+
+
+            
+            console.log('Author Details:', this.Author)
+            
+            console.log('User Details:',this.UserDetails);
+            
+            //  console.log( 'auhtors are: ',User); // Check if the data is populated
+            //  console.log(this.user_id)
+        })
+
+        .catch(error => {
+            console.error('Error fetching Users:', error)
+            });
+    },
 
         fetchGenres(){
 
