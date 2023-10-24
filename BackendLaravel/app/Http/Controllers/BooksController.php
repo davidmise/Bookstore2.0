@@ -14,7 +14,7 @@ class BooksController extends Controller
     public function index()
     {
         //display user input  
-        $books = Books::with('genre')->with('author')->get();
+        $books = Books::with('genre')->with('author')->paginate(10);
         return $books;
 
         // $books = Authors::with('books')->get();
@@ -138,7 +138,7 @@ class BooksController extends Controller
                         ->where(function ($query) use ($searchTerm){
                         $query -> where('Books.title', 'LIKE', "%$searchTerm%")
                         ->orWhere('Authors.name_of_the_Author', 'LIKE', "%$searchTerm%");
-                      }) ->get();
+                      }) ->paginate();
         
         return  response()->json([
             'message' => 'Book searched successfully',
