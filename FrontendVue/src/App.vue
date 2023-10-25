@@ -1,8 +1,9 @@
 <script >
 // import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+
 import NavigationBar from './components/NavigationBar.vue'
-// import navigation from './components/NavigationBar.vue'
+// import ProfileIcon from './components/icons/ProfileIcon.vue'
+// import cartIcon from './components/icons/cartIcon.vue'
 
 export default{
   data(){
@@ -12,8 +13,9 @@ export default{
   },
 
   components:{
-    HelloWorld,
-    NavigationBar
+    // ProfileIcon,
+    NavigationBar,
+    // cartIcon,
 },
 
   created(){
@@ -31,20 +33,22 @@ export default{
 </script>
 
 <template>
-  <header>
-    <!-- <div class="col-md-2">
-      <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Ym9va3xlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80" class="img-fluid rounded-start" alt="...">
-    </div> -->
-    <!-- <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" /> -->
-    
-    <div class="wrapper">
-      <HelloWorld msg="Online Bookstore!" /> 
-      <NavigationBar></NavigationBar>            
-    
+  <NavigationBar></NavigationBar>
+  <!-- <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+      
+      </div>
+      <div class="col-md-2">
+        <ProfileIcon msg="profile"></ProfileIcon>
+      </div>
+      <div class="col-md-2">
+        <cartIcon msg="cart"></cartIcon>
+      </div>
     </div>
-    
-  </header>
-
+  </div> -->
+      
+ 
   <RouterView />
 </template>
 

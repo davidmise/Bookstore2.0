@@ -7,6 +7,7 @@ import Books from '../views/BooksView.vue'
 import  AuthorProfileComponent from '../views/AuthorProfile.vue'
 import ReaderProfileComponent from '../views/ReaderProfile.vue'
 import publishBooks from '../views/AuthorsView.vue'
+import CartPage from '../views/CartView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -65,6 +66,13 @@ const router = createRouter({
       component: ReaderProfileComponent, // Replace with your actual component
       meta: { requiresAuth: true }, // Requires authentication
   },
+
+  {
+    path: '/cart',
+    name: 'cart',
+    component: CartPage, // Replace with your actual component
+    meta: { requiresAuth: true }, // Requires authentication
+},
 
 
   ]

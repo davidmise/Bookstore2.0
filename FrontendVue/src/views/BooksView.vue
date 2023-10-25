@@ -1,6 +1,17 @@
 <template >
-    <!-- <button style="border-radius: 20px;" type="button" class="btn btn-outline-success " data-toggle="modal" data-target="#myModal">Add Books + </button>    -->
-    <!-- <addBook style="border-radius: 20px;"  type="submit" text="Add Book+" classObject=" btn btn-outline-success mx-5" data-toggle="modal" data-target="#myModal"> </addBook> -->
+    <!-- <header>
+        <div class="wrapper">
+            <div class="input-group mb-3 rounded row">
+                <input type="text" class="form-control col-md-10" placeholder="search Author/books.." aria-label="search Author/books.." aria-describedby="button-addon2">
+                <span class="col-md-2">
+                    <svg color="teal" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </span>
+            </div>
+        
+         </div>
+    </header> -->
     <template v-for="(book, index) in Books" :key="index">
         <div class="container mt-5 pt-5">
           <div class="row">
@@ -22,7 +33,8 @@
                                 <p class="card-text"><small class="text-muted"> <b>By:</b> {{ book.author.name_of_the_Author}} </small></p>
                                 <p>Price: {{book.price}} </p>
                                 <button type="button" class="btn btn-outline-success">Buy </button>
-                                <img style=" margin-left:10px;" width="36" height="36" src="https://img.icons8.com/sf-regular-filled/96/12B886/shopping-cart.png" alt="shopping-cart"/>
+                                <button style=" margin-left:50px;" type="button" class="btn btn-outline-success">Add to Cart </button>
+                                <!-- <img style=" margin-left:10px;" width="36" height="36" src="https://img.icons8.com/sf-regular-filled/96/12B886/shopping-cart.png" alt="shopping-cart"/> -->
                              </div>   
                         </div>
                     </div>
@@ -32,6 +44,7 @@
           </div>
         </div>
     </template>
+
       <!-- Pagination controls -->
       <div class="container mt-4">
         <ul class="pagination justify-content-center">
@@ -145,3 +158,22 @@ export default{
     
 };
 </script> 
+<style>
+@media (min-width: 1024px) {
+    header {
+      display: flex;
+      place-items: center;
+      padding-right: calc(var(--section-gap) / 2);
+    }
+  
+    .logo {
+      margin: 0 2rem 0 0;
+    }
+  
+    header .wrapper {
+      display: flex;
+      place-items: flex-start;
+      flex-wrap: wrap;
+    }
+  
+  }</style>
