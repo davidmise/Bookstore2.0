@@ -2,7 +2,7 @@
 // import HelloWorld from './components/HelloWorld.vue'
 import ProfileIcon from './icons/ProfileIcon.vue'
 import cartIcon from './icons/cartIcon.vue'
-import searchBar from '../components/SearchBar.vue'
+// import searchBar from '../components/SearchBar.vue'
 
 export default{
     data(){
@@ -14,7 +14,7 @@ export default{
     components:{
     ProfileIcon,
     cartIcon,
-    searchBar
+    // searchBar
     },
   
     created(){
@@ -94,7 +94,7 @@ export default{
           <div class="nav-item navbar-brand col-">
             <ProfileIcon msg="profile"></ProfileIcon>
           </div>
-        <searchBar></searchBar>
+        <!-- <searchBar></searchBar> -->
         </div>
           
       </div>

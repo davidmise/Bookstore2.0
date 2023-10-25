@@ -4,7 +4,7 @@
         <input class="form-control me-2" v-model="searchQuery" @input="searchData" type="search" placeholder="Search Book" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
     </div>
-    <div>
+    <!-- <div>
         <ul v-if="books.length">
             <li v-for="book in books" :key="book.id">
               {{ book.title }} by {{ book.name_of_the_Author }}
@@ -13,11 +13,11 @@
           <div v-else>
             No books found.
           </div>
-    </div>
+    </div> -->
 
 </template>
 
-<script>
+<script> 
 import axios from 'axios'
 
 export default{
@@ -36,7 +36,8 @@ export default{
             
             axios.get('http://127.0.0.1:8000/api/searchbooks', { params: { search_term: this.searchQuery} })
             .then(response =>{
-                this.books = response.data.books.data;
+                this.data = response.data;
+                this.Books = response.data.books.data;
             })
         },
     },
