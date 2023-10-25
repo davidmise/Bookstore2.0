@@ -134,11 +134,14 @@ class BooksController extends Controller
     {
         $searchTerm = $request->input('search_term');
         
-        $books = Books::leftJoin('Authors', 'Books.author_id','=','Author.id')
-                        ->where(function ($query) use ($searchTerm){
-                        $query -> where('Books.title', 'LIKE', "%$searchTerm%")
-                        ->orWhere('Authors.name_of_the_Author', 'LIKE', "%$searchTerm%");
-                      }) ->paginate();
+        $books = Books::with('genre')->with('author')->leftJoin('Authors', 'Books.author_id','=','Authors.id')
+                        -> where('Books.title', 'LIKE', "%$searchTerm%")
+                        ->orWhere('Authors.name_of_the_Author', 'LIKE', "%$searchTerm%")
+                        ->paginate();
+                    //     ->where(function ($query) use ($searchTerm){
+                    //     $query -> where('Books.title', 'LIKE', "%$searchTerm%")
+                    //     ->orWhere('Authors.name_of_the_Author', 'LIKE', "%$searchTerm%");
+                    //   }) ->paginate();
         
         return  response()->json([
             'message' => 'Book searched successfully',
