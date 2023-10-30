@@ -10,6 +10,8 @@
         // You can also remove the user_id from local storage here
         localStorage.removeItem('user_id');
         localStorage.removeItem('Author_id');
+        localStorage.removeItem('Reader_id');
+
         console.log('Author id is:', localStorage.getItem('Author_id'));
 
         this.$router.push({ name: 'login' });

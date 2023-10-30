@@ -289,7 +289,6 @@ created() {
     // Fetch User details
     this.getUserWithAuthor();
 
-
 },
 
 
@@ -300,15 +299,13 @@ methods: {
             .then(response => {
 
                 this.AuthorDetails = response.data;
-               
                 this.ShowModal=false;
 
                 // Store Author_id in the browser 
                 localStorage.setItem('Author_id', response.data.Author_id);
                 
                 // convert author id into interger
-              
-                
+
                 // check if data is populated
                 console.log(this.AuthorDetails); 
                 console.log('added successfully');
@@ -318,9 +315,7 @@ methods: {
                 console.log('the Author_id is:', Author_id); 
     
                 if(user_role == 'author') {
-              
                     console.log('welcone')
-
                     console.log(Author_id)
         
                 }
@@ -328,7 +323,6 @@ methods: {
             .catch(error =>{
                 console.error('Error fetching Author:',error)
             });
-
     },
 
    
@@ -339,7 +333,7 @@ methods: {
          this.UserDetails = response.data;
 
          this.Author= response.data.author;
-         this. Author.id = response.data.author.id;
+        //  this. Author.id = response.data.author.id;
          
          console.log('Author Details:', this.Author)
           

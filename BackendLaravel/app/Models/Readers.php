@@ -11,14 +11,14 @@ class Readers extends Model
     protected $fillable =[
         'name',
         'email',
-        'password',
         'phone_number',
         'address',
         'cart_id',
-        'order_id'
+        'order_id',
+        'user_id',
     ];
     public function user(){ 
-        return $this -> belongsTo(User::class);
+        return $this -> belongsTo(User::class,'user_id');
     }
     public function orders(){ 
         return $this -> hasMany(Orders::class);

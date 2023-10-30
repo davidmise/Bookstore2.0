@@ -11,6 +11,7 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\OrderItemsController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ReviewsController;
+use App\Http\Controllers\ReadersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,15 @@ Route::get('/authors/{id}',[AuthorsController::class, "show"]);
 Route::put('/authors/{id}',[AuthorsController::class, "update"]);
 Route::delete('/authors',[AuthorsController::class, "destroy"]);
 Route::get('/search_authors',[AuthorsController::class, "searchAuthors"]);
+
+// readers (post and get)
+Route::post('/readers',[ReadersController::class, "create"]);
+Route::get('/readers',[ReadersController::class, "index"]);
+Route::get('/readers/{id}',[ReadersController::class, "show"]);
+Route::put('/readers/{id}',[ReadersController::class, "update"]);
+Route::delete('/readers/{id}',[ReadersController::class, "destroy"]);
+Route::get('/searchReaders',[ReadersController::class, "searchReaders"]);
+
 
 // genres (post and get)
 Route::post('/genres',[GenreController::class, "create"]);

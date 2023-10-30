@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Authors;
+use App\Models\Readers;
 use Doctrine\Inflector\Rules\English\Rules;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator; 
@@ -51,19 +52,19 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        $user = User::with("author")->find($id);
+    public function show( Request $request,  string $id)
+    {  
+        $user = User::with("author")->with("reader")->find($id);    
 
-        if(!$user){
-             return response()->json(
-            [
-                "status" => false,
-                'message' => "User not found",
-            ]
-            );
-        }
-
+           if(!$user){
+                return response()->json(
+               [
+                   "status" => false,
+                   'message' => "User not found",
+               ]
+               );
+           }
+           
         return response()->json($user);
     }
 

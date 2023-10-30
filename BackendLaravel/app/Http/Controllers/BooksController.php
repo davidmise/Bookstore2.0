@@ -14,7 +14,7 @@ class BooksController extends Controller
     public function index()
     {
         //display user input  
-        $books = Books::with('genre')->with('author')->paginate(10);
+        $books = Books::with('genre')->with('author')->paginate(5);
         return $books;
 
         // $books = Authors::with('books')->get();
@@ -54,13 +54,9 @@ class BooksController extends Controller
                 ], 422);
             }
 
-            
-             
-        
                 $book = Books::create($request->all());
-                $author = $request->author->id;
+                $author = $request->Author_id;
         
-
                 return response()->json([
                     'message' => 'Book created successfully',
                     'status' => true,

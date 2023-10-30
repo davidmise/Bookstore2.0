@@ -6,6 +6,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Authors;
+use App\Models\Readers;
+use App\Models\Order_items;
+use App\Models\Orders;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator; 
 
@@ -14,6 +17,7 @@ class AuthenticationController extends Controller
 //    user creation / registration/Singup
     public function create (Request $request)
      {
+       
         $rules = [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -53,17 +57,32 @@ class AuthenticationController extends Controller
             'role' =>  $request->input('role'),
         ]);
         $user->save();
-
+        // $order= Orders::where('user_id','=', $user->id)->first();
+        // $cart= Order_items::where('user_id','=', $user->id)->first();
         if($request['role'] == 'author'){
             $author = new Authors([
                 'user_id' => $user->id,
             ]);
             $author->save();
         }
+       else if($request['role'] == 'reader'){
+            $reader = new Readers([
+                'user_id' => $user->id,
+                'id'=>$request['id'],
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'address' => $request ->input('address'),
+                'phone_number' => $request->input('phone_number'),
+            ]);
+            $reader->save();
+        }
+        else{    
+            return response()->json([
+                'status' => false,
+                'message' => 'role can not be NULL'
+            ]);
+        }
         
-    
-        
-    
         return response()->json([
             'status' => true,
             'message' => 'User created successfully'
