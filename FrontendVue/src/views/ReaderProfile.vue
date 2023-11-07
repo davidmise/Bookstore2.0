@@ -247,11 +247,17 @@ export default{
                     
                   this.ReaderDetails = response.data;        
                   this.ShowModal=false;
+
+                  if(response.data.status === false){
+                    // WHAT SHOULD THIS DO IF IT FAILS
+                    return
+                  }
+                  this.getUserWithReader()
                   // Store Author_id in the browser 
                   localStorage.setItem('Reader_id', response.data.Reader_id); 
                 // check if data is populated
                   console.log(this.ReaderDetails); 
-                  console.log('added successfully');
+                  
                   // store Reader id
                   var user_role = localStorage.getItem('user_role') //retrieve user role
                   console.log('the Redear_id is:', Reader_id); 
